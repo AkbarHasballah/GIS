@@ -1,47 +1,65 @@
-async function getData(url) {
-    try {
-        const response = await fetch(url);
+document.addEventListener("DOMContentLoaded", () => {
+    const pointTable = document.getElementById("pointTable").getElementsByTagName('tbody')[0];
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+    fetch("butuhupdate") // Ganti "data.json" dengan nama file JSON Anda
+        .then(response => response.json())
+        .then(data => {
+            data.features.forEach(feature => {
+                if (feature.geometry.type === "Point") {
+                    const row = pointTable.insertRow();
+                    const nameCell = row.insertCell(0);
+                    const coordinatesCell = row.insertCell(1);
+                    const typeCell = row.insertCell(2);
+                    nameCell.innerText = feature.properties.name;
+                    coordinatesCell.innerText = JSON.stringify(feature.geometry.coordinates);
+                    typeCell.innerText = feature.geometry.type;
+                    
+                }
+            });
+        })
+        .catch(error => console.error("Terjadi kesalahan:", error));
+});
 
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+document.addEventListener("DOMContentLoaded", () => {
+    const pointTable = document.getElementById("polygonTable").getElementsByTagName('tbody')[0];
 
-async function displayData() {
-    const jsonDataContainer = document.getElementById('jsonData');
+    fetch("butuh") // Ganti "data.json" dengan nama file JSON Anda
+        .then(response => response.json())
+        .then(data => {
+            data.features.forEach(feature => {
+                if (feature.geometry.type === "Polygon") {
+                    const row = pointTable.insertRow();
+                    const nameCell = row.insertCell(0);
+                    const coordinatesCell = row.insertCell(1);
+                    const typeCell = row.insertCell(2);
+                    nameCell.innerText = feature.properties.name;
+                    coordinatesCell.innerText = JSON.stringify(feature.geometry.coordinates);
+                    typeCell.innerText = feature.geometry.type;
+                    
+                }
+            });
+        })
+        .catch(error => console.error("Terjadi kesalahan:", error));
+});
 
-    // Ganti URL sesuai dengan lokasi file JSON yang Anda ingin ambil datanya
-    const polygonData = await getData('polygon.json');
-    const polylineData = await getData('polyline.json');
-    const waypointData = await getData('waypoint.json');
+document.addEventListener("DOMContentLoaded", () => {
+    const pointTable = document.getElementById("polylineTable").getElementsByTagName('tbody')[0];
 
-    // Tampilkan data di dalam elemen jsonDataContainer
-    jsonDataContainer.innerHTML += `
-        <div>
-            <h2>Polygon Data</h2>
-            <p>Name: ${polygonData.properties.name}</p>
-            <p>Type: ${polygonData.geometry.type}</p>
-            <p>Coordinates: [${polygonData.geometry.coordinates.join(', ')}]</p>
-        </div>
-        <div>
-            <h2>Polyline Data</h2>
-            <p>Name: ${polylineData.properties.name}</p>
-            <p>Type: ${polylineData.geometry.type}</p>
-            <p>Coordinates: [${polylineData.geometry.coordinates.join(', ')}]</p>
-        </div>
-        <div>
-            <h2>Waypoint Data</h2>
-            <p>Name: ${waypointData.properties.name}</p>
-            <p>Type: ${waypointData.geometry.type}</p>
-            <p>Coordinates: [${waypointData.geometry.coordinates.join(', ')}]</p>
-        </div>
-    `;
-}
-
-displayData();
+    fetch("butuh") // Ganti "data.json" dengan nama file JSON Anda
+        .then(response => response.json())
+        .then(data => {
+            data.features.forEach(feature => {
+                if (feature.geometry.type === "LineString") {
+                    const row = pointTable.insertRow();
+                    const nameCell = row.insertCell(0);
+                    const coordinatesCell = row.insertCell(1);
+                    const typeCell = row.insertCell(2);
+                    nameCell.innerText = feature.properties.name;
+                    coordinatesCell.innerText = JSON.stringify(feature.geometry.coordinates);
+                    typeCell.innerText = feature.geometry.type;
+                    
+                }
+            });
+        })
+        .catch(error => console.error("Terjadi kesalahan:", error));
+});
