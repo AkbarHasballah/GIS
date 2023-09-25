@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const pointTable = document.getElementById("pointTable").getElementsByTagName('tbody')[0];
 
-    fetch("butuhupdate") // Ganti "data.json" dengan nama file JSON Anda
+    fetch("https://raw.githubusercontent.com/AkbarHasballah/Geografis_salman.github.io/main/waypoint.json") // Ganti "data.json" dengan nama file JSON Anda
         .then(response => response.json())
         .then(data => {
             data.features.forEach(feature => {
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const pointTable = document.getElementById("polygonTable").getElementsByTagName('tbody')[0];
 
-    fetch("butuh") // Ganti "data.json" dengan nama file JSON Anda
+    fetch("https://raw.githubusercontent.com/AkbarHasballah/Geografis_salman.github.io/main/polygon.json") // Ganti "data.json" dengan nama file JSON Anda
         .then(response => response.json())
         .then(data => {
             data.features.forEach(feature => {
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const pointTable = document.getElementById("polylineTable").getElementsByTagName('tbody')[0];
 
-    fetch("butuh") // Ganti "data.json" dengan nama file JSON Anda
+    fetch("https://raw.githubusercontent.com/AkbarHasballah/Geografis_salman.github.io/main/polyline.json") // Ganti "data.json" dengan nama file JSON Anda
         .then(response => response.json())
         .then(data => {
             data.features.forEach(feature => {
